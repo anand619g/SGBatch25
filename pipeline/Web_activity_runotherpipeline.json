@@ -17,6 +17,7 @@
 				"typeProperties": {
 					"method": "POST",
 					"url": "https://management.azure.com/subscriptions/4efc3508-8c84-4a3f-8c78-58d6a0136742/resourceGroups/RG-Batch23B/providers/Microsoft.DataFactory/factories/DF-Batch23B/pipelines/RESTAPI/createRun?api-version=2018-06-01",
+					"body": "{@test}",
 					"authentication": {
 						"type": "MSI",
 						"resource": "https://management.azure.com/"
