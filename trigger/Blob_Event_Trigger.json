@@ -1,0 +1,25 @@
+{
+	"name": "Blob_Event_Trigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Event_based_Pipeline",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/eventbasedtrigger/blobs/Input",
+			"blobPathEndsWith": ".csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/4efc3508-8c84-4a3f-8c78-58d6a0136742/resourceGroups/RG-SGBATCH25/providers/Microsoft.Storage/storageAccounts/sgadlsbatch25",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

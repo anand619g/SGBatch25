@@ -1,0 +1,31 @@
+{
+	"name": "KV_TEST_SQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_KV_SERVICE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CustName",
+				"type": "varchar"
+			},
+			{
+				"name": "TrxnDate",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ADDRESS_COMMON"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,9 @@
+{
+	"name": "DF-SGBATCH25",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8f4db2c4-63db-41fb-b747-0c0aef3e883c",
+		"tenantId": "f2054a40-d52d-4cc1-8db3-626b08265db4"
+	}
+}

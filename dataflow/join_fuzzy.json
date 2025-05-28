@@ -1,0 +1,68 @@
+{
+	"name": "join_fuzzy",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "fuzzyleft",
+						"type": "DatasetReference"
+					},
+					"name": "fuzzyleft"
+				},
+				{
+					"dataset": {
+						"referenceName": "fuzzyright",
+						"type": "DatasetReference"
+					},
+					"name": "fuzzyright"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dataset_ouput_folder",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "join1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {Fruits Data} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> fuzzyleft",
+				"source(output(",
+				"          Fruits as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> fuzzyright",
+				"fuzzyleft, fuzzyright join(fuzzyCompare({Fruits Data}, Fruits, 75.00),",
+				"     joinType:'inner',",
+				"     matchType:'fuzzy',",
+				"     ignoreSpaces: false,",
+				"     scoreColumn:'Similarity',",
+				"     broadcast: 'off')~> join1",
+				"join1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          DEPARTMENT_ID as string,",
+				"          DEPARTMENT_NAME as string",
+				"     ),",
+				"     partitionFileNames:['join2.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}
