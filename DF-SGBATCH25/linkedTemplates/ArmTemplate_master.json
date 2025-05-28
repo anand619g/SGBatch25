@@ -1,0 +1,194 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "DF-SGBATCH25"
+		},
+		"LS_BLOB_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_BLOB'"
+		},
+		"LS_BLOB_KV_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_BLOB_KV'",
+			"defaultValue": "DefaultEndpointsProtocol=https;AccountName=sgadlsbatch25;"
+		},
+		"LS_SQL_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SQL'"
+		},
+		"KV_LS_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kv-ade25.vault.azure.net/"
+		},
+		"LS_SQL_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sgadebatch25.database.windows.net"
+		},
+		"LS_SQL_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sgadebatch25"
+		},
+		"LS_SQL_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "anand"
+		},
+		"LS_SQL_KV_SERVICE_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sgadebatch25.database.windows.net"
+		},
+		"LS_SQL_KV_SERVICE_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "sgadebatch25"
+		},
+		"LS_SQL_KV_SERVICE_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "anand"
+		},
+		"Blob_Event_Trigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/4efc3508-8c84-4a3f-8c78-58d6a0136742/resourceGroups/RG-SGBATCH25/providers/Microsoft.Storage/storageAccounts/sgadlsbatch25"
+		},
+		"Tumbling_Window_Trigger2_properties_Tumbling_Window_Pipeline_parameters_windowEndTime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndTime"
+		},
+		"Tumbling_Window_Trigger2_properties_Tumbling_Window_Pipeline_parameters_windowStartTime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowStartTime"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "DF-SGBATCH25_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_BLOB_connectionString": {
+						"value": "[parameters('LS_BLOB_connectionString')]"
+					},
+					"LS_SQL_password": {
+						"value": "[parameters('LS_SQL_password')]"
+					},
+					"KV_LS_properties_typeProperties_baseUrl": {
+						"value": "[parameters('KV_LS_properties_typeProperties_baseUrl')]"
+					},
+					"LS_SQL_properties_typeProperties_server": {
+						"value": "[parameters('LS_SQL_properties_typeProperties_server')]"
+					},
+					"LS_SQL_properties_typeProperties_database": {
+						"value": "[parameters('LS_SQL_properties_typeProperties_database')]"
+					},
+					"LS_SQL_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQL_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "DF-SGBATCH25_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_BLOB_KV_connectionString": {
+						"value": "[parameters('LS_BLOB_KV_connectionString')]"
+					},
+					"LS_SQL_KV_SERVICE_properties_typeProperties_server": {
+						"value": "[parameters('LS_SQL_KV_SERVICE_properties_typeProperties_server')]"
+					},
+					"LS_SQL_KV_SERVICE_properties_typeProperties_database": {
+						"value": "[parameters('LS_SQL_KV_SERVICE_properties_typeProperties_database')]"
+					},
+					"LS_SQL_KV_SERVICE_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQL_KV_SERVICE_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-SGBATCH25_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "DF-SGBATCH25_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-SGBATCH25_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "DF-SGBATCH25_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Blob_Event_Trigger_properties_typeProperties_scope": {
+						"value": "[parameters('Blob_Event_Trigger_properties_typeProperties_scope')]"
+					},
+					"Tumbling_Window_Trigger2_properties_Tumbling_Window_Pipeline_parameters_windowEndTime": {
+						"value": "[parameters('Tumbling_Window_Trigger2_properties_Tumbling_Window_Pipeline_parameters_windowEndTime')]"
+					},
+					"Tumbling_Window_Trigger2_properties_Tumbling_Window_Pipeline_parameters_windowStartTime": {
+						"value": "[parameters('Tumbling_Window_Trigger2_properties_Tumbling_Window_Pipeline_parameters_windowStartTime')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'DF-SGBATCH25_ArmTemplate_2')]"
+			]
+		}
+	]
+}

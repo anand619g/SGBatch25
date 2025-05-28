@@ -1,0 +1,54 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "DF-SGBATCH25"
+		},
+		"LS_BLOB_connectionString": {
+			"value": ""
+		},
+		"LS_BLOB_KV_connectionString": {
+			"value": "DefaultEndpointsProtocol=https;AccountName=sgadlsbatch25;"
+		},
+		"LS_SQL_password": {
+			"value": ""
+		},
+		"KV_LS_properties_typeProperties_baseUrl": {
+			"value": "https://kv-ade25.vault.azure.net/"
+		},
+		"LS_SQL_properties_typeProperties_server": {
+			"value": "sgadebatch25.database.windows.net"
+		},
+		"LS_SQL_properties_typeProperties_database": {
+			"value": "sgadebatch25"
+		},
+		"LS_SQL_properties_typeProperties_userName": {
+			"value": "anand"
+		},
+		"LS_SQL_KV_SERVICE_properties_typeProperties_server": {
+			"value": "sgadebatch25.database.windows.net"
+		},
+		"LS_SQL_KV_SERVICE_properties_typeProperties_database": {
+			"value": "sgadebatch25"
+		},
+		"LS_SQL_KV_SERVICE_properties_typeProperties_userName": {
+			"value": "anand"
+		},
+		"Blob_Event_Trigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/4efc3508-8c84-4a3f-8c78-58d6a0136742/resourceGroups/RG-SGBATCH25/providers/Microsoft.Storage/storageAccounts/sgadlsbatch25"
+		},
+		"Tumbling_Window_Trigger2_properties_Tumbling_Window_Pipeline_parameters_windowEndTime": {
+			"value": "@trigger().outputs.windowEndTime"
+		},
+		"Tumbling_Window_Trigger2_properties_Tumbling_Window_Pipeline_parameters_windowStartTime": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
