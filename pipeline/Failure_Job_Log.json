@@ -147,7 +147,7 @@
 									},
 									"status": {
 										"value": {
-											"value": "'Y'",
+											"value": "Y",
 											"type": "Expression"
 										},
 										"type": "String"
@@ -190,7 +190,7 @@
 									},
 									"status": {
 										"value": {
-											"value": "'N'",
+											"value": "N",
 											"type": "Expression"
 										},
 										"type": "String"
